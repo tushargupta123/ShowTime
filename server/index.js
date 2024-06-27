@@ -4,9 +4,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 const userRoutes = require('./routes/userRoutes');
+const theatreRoutes = require('./routes/theatreRoutes');
+const showRoutes = require('./routes/showRoutes');
+const movieRoutes = require('./routes/movieRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+
+const db = process.env.mongodb_url;
 
 async function main() {
-    await mongoose.connect("mongodb+srv://tushargupta2k3:tUshar%40123@twitter.fzbvq5v.mongodb.net/showtime");
+    await mongoose.connect(db);
 }
 main().catch((err) => console.log(err));
 
@@ -14,6 +20,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/user',userRoutes);
+app.use('/api/theatre',theatreRoutes);
+app.use('/api/show',showRoutes);
+app.use('/api/movie',movieRoutes);
+app.use('/api/booking',bookingRoutes);
 
 app.listen(process.env.PORT,() => {
     console.log("server listening on port " + process.env.PORT);
