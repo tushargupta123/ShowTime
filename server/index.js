@@ -23,7 +23,7 @@ app.use('/api/user',userRoutes);
 app.use('/api/theatre',theatreRoutes);
 app.use('/api/show',showRoutes);
 app.use('/api/movie',movieRoutes);
-app.use('/api/booking',bookingRoutes);
+app.use('/api/bookings',bookingRoutes);
 
 app.listen(process.env.PORT,() => {
     console.log("server listening on port " + process.env.PORT);

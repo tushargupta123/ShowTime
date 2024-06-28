@@ -1,4 +1,5 @@
 const Theatre = require('../models/theatreModel');
+const Show = require('../models/showModel');
 
 const addTheatre = async (req, res) => {
     try {
@@ -81,10 +82,41 @@ const deleteTheatre = async(req,res) => {
         });
     }
 }
+
+const getAllTheatresByMovie = async(req, res) => {
+    try {
+        const {movieId, date} = req.body;
+        const shows = await Show.find({movie: movieId, date}).populate("theatre").sort({createdAt:-1});
+        let uniqueTheatres = [];
+        shows.forEach(show => {
+            const theatre = uniqueTheatres.find(theatre => theatre._id === show.theatre._id);
+            if(!theatre){
+                const showsForThisTheatre = shows.filter(showObj => showObj.theatre._id == show.theatre._id);
+                uniqueTheatres.push({
+                    ...show.theatre._doc,
+                    shows: showsForThisTheatre
+                })
+            }
+        });
+        res.status(200).send({
+            success: true,
+            message: "Theatres fetched successfully!",
+            data: uniqueTheatres
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            success: false,
+            message: err.message
+        });
+    }
+}
+
 module.exports = {
     addTheatre,
     getAllTheatresByOwner,
     getAllTheatres,
     updateTheatre,
-    deleteTheatre
+    deleteTheatre,
+    getAllTheatresByMovie
 }

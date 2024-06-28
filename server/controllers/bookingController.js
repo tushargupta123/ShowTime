@@ -7,27 +7,28 @@ const makePayment = async (req, res) => {
         const { token, amount } = req.body;
         const customer = await stripe.customers.create({
             email: token.email,
-            source: token.id
-        })
+            source: token.id,
+        });
         const paymentIntent = await stripe.paymentIntents.create({
             amount: amount,
             currency: "usd",
             customer: customer.id,
             payment_method_types: ["card"],
-            receiet_email: token.email,
-            description: "Token has been assigned to movie!"
+            receipt_email: token.email,
+            description: "Token has been assigned to the movie!",
         });
+
         const transactionId = paymentIntent.id;
-        res.status(200).send({
+
+        res.send({
             success: true,
             message: "Payment Successful! Ticket(s) booked!",
-            data: transactionId
-        })
+            data: transactionId,
+        });
     } catch (err) {
-        console.log(err);
-        res.status(500).send({
+        res.send({
             success: false,
-            message: err.message
+            message: err.message,
         });
     }
 }

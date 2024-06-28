@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/add-show',authMiddleware,addShow);
 router.post('/get-all-shows-by-theatre',authMiddleware,getAllShowsByTheatre);
 router.delete('/delete-show',authMiddleware,deleteShow);
-router.get('/get-show-by-id',authMiddleware,getShowById);
+router.post('/get-show-by-id',authMiddleware,getShowById);
 
 module.exports = router;

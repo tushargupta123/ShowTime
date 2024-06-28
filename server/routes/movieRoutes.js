@@ -8,6 +8,5 @@ router.get('/get-all-movies',authMiddleware,getAllMovies);
 router.put('/update-movie',authMiddleware,updateMovie);
 router.delete('/delete-movie',authMiddleware,deleteMovie);
 router.get('/get-movie-by-id/:movieId',authMiddleware,getMovieById);
-router.post('/get-all-theatres-by-movie',authMiddleware,getAllTheatresByMovie);
 
 module.exports = router;

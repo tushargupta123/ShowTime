@@ -51,7 +51,7 @@ const deleteShow = async(req,res) => {
 
 const getShowById = async(req, res) => {
     try {
-        const show = await Show.findById(req.query.showId).populate("movie").populate("theatre");
+        const show = await Show.findById(req.body.showId).populate("movie").populate("theatre");
         res.status(200).send({
             success: true,
             message: "Show fetched successfully!",
