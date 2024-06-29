@@ -19,6 +19,10 @@ main().catch((err) => console.log(err));
 app.use(cors());
 app.use(express.json());
 
+app.get('/',(req,res) => {
+    res.send('Api working!')
+})
+
 app.use('/api/user',userRoutes);
 app.use('/api/theatre',theatreRoutes);
 app.use('/api/show',showRoutes);
