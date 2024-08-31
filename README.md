@@ -5,7 +5,7 @@ Welcome to the Showtime Project! This project is built using the MERN stack, inc
 https://show-time-frontend.vercel.app
 
 ## Credentials
-email - admin@gmail.com
+email - admin@gmail.com<br/>
 password - 123
 
 ## Introduction
