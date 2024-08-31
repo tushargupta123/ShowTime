@@ -6,6 +6,7 @@ import { message, Table } from "antd";
 import { useDispatch } from "react-redux";
 import { HideLoading, ShowLoading } from "../../redux/loaderSlice";
 import { DeleteMovie, GetAllMovies } from "../../apicalls/movies";
+import { DeleteFilled, EditFilled } from "@ant-design/icons"
 
 function MoviesList() {
   const [movies, setMovies] = React.useState([]);
@@ -17,10 +18,9 @@ function MoviesList() {
     try {
       dispatch(ShowLoading());
       const response = await GetAllMovies();
+      console.log(response)
       if (response.success) {
         setMovies(response.data);
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {
@@ -36,8 +36,6 @@ function MoviesList() {
       if (response.success) {
         message.success(response.message);
         getData();
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {
@@ -51,7 +49,6 @@ function MoviesList() {
       title: "Poster",
       dataIndex: "poster",
       render: (posterLink) => {
-        // All your data manipulations.
         return (
           <img
             src={posterLink}
@@ -71,10 +68,6 @@ function MoviesList() {
     {
       title: "Description",
       dataIndex: "description",
-    },
-    {
-      title: "Duration",
-      dataIndex: "duration",
     },
     {
       title: "Genre",
@@ -97,20 +90,14 @@ function MoviesList() {
       render: (text, record) => {
         return (
           <div className="flex gap-1">
-            <i
-              className="ri-delete-bin-line"
-              onClick={() => {
-                handleDelete(record._id);
-              }}
-            ></i>
-            <i
-              className="ri-pencil-line"
-              onClick={() => {
-                setSelectedMovie(record);
-                setFormType("edit");
-                setShowMovieFormModal(true);
-              }}
-            ></i>
+            <DeleteFilled onClick={() => {
+              handleDelete(record._id);
+            }} style={{ fontSize: '20px'}}/>
+            <EditFilled onClick={() => {
+              setSelectedMovie(record);
+              setFormType("edit");
+              setShowMovieFormModal(true);
+            }} style={{ fontSize: '20px'}}/>
           </div>
         );
       },
@@ -119,7 +106,6 @@ function MoviesList() {
 
   useEffect(() => {
     getData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -19,10 +19,7 @@ const Bookings = () => {
             if (response.success) {
                 setBookings(response.data);
                 console.log(response.data);
-            } else {
-                message.error(response.message);
             }
-
             dispatch(HideLoading());
         } catch (err) {
             message.error(err.message);

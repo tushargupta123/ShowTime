@@ -39,8 +39,6 @@ function MovieForm({
         message.success(response.message);
         onClose();
         setSelectedMovie(null);
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {

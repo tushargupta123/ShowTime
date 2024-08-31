@@ -185,6 +185,7 @@ function BookShow() {
                             billingAddress
                             token={onToken}
                             stripeKey={STRIPE_KEY}
+                            currency='inr'
                             amount={selectedSeats.length * show.ticketPrice * 100}
                         >
                             <Button title="Pay to book" />

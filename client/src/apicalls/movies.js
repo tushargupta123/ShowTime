@@ -1,10 +1,10 @@
-import { axiosInstance } from ".";
+import { fetchInstance } from ".";
 
 // Create
 export const AddMovie = async (payload) => {
   try {
-    const response = await axiosInstance.post("/api/movie/add-movie", payload);
-    return response.data;
+    const response = await fetchInstance('POST',"/api/movie/add-movie", payload);
+    return response.json();
   } catch (err) {
     return err;
   }
@@ -13,8 +13,8 @@ export const AddMovie = async (payload) => {
 // Read
 export const GetAllMovies = async () => {
   try {
-    const response = await axiosInstance.get("/api/movie/get-all-movies");
-    return response.data;
+    const response = await fetchInstance('GET',`/api/movie/get-all-movies`)
+    return response.json();
   } catch (err) {
     return err;
   }
@@ -23,8 +23,8 @@ export const GetAllMovies = async () => {
 // Update
 export const UpdateMovie = async (payload) => {
   try {
-    const response = await axiosInstance.put("/api/movie/update-movie", payload);
-    return response.data;
+    const response = await fetchInstance('PUT',"/api/movie/update-movie", payload);
+    return response.json();
   } catch (err) {
     return err;
   }
@@ -33,8 +33,8 @@ export const UpdateMovie = async (payload) => {
 // Delete
 export const DeleteMovie = async (movieId) => {
   try {
-    const response = await axiosInstance.delete(`/api/movie/delete-movie?movieId=${movieId}`);
-    return response.data;
+    const response = await fetchInstance('DELETE',`/api/movie/delete-movie?movieId=${movieId}`);
+    return response.json();
   } catch (err) {
     return err;
   }
@@ -42,8 +42,8 @@ export const DeleteMovie = async (movieId) => {
 
 export const GetMovieById = async (movieId) => {
   try {
-    const response = await axiosInstance.get(`/api/movie/get-movie-by-id/${movieId}`);
-    return response.data;
+    const response = await fetchInstance('GET',`/api/movie/get-movie-by-id/${movieId}`);
+    return response.json();
   } catch (err) {
     return err.response;
   }

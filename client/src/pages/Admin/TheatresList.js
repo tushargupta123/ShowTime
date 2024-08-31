@@ -14,8 +14,6 @@ function TheatresList() {
       const response = await GetAllTheatres();
       if (response.success) {
         setTheatres(response.data);
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {
@@ -35,8 +33,6 @@ function TheatresList() {
       if (response.success) {
         message.success(response.message);
         getData();
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {

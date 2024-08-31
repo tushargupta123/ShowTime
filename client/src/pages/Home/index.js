@@ -18,8 +18,6 @@ const Home = () => {
       const response = await GetAllMovies();
       if (response.success) {
         setMovies(response.data);
-      } else {
-        message.error(response.message);
       }
     } catch (err) {
       message.error(err.message);
@@ -31,8 +29,6 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(movies);
 
   return (
     <div>

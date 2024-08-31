@@ -6,6 +6,7 @@ import { HideLoading, ShowLoading } from "../../redux/loaderSlice.js";
 import { AddShow , DeleteShow, GetAllShowsByTheatre} from "../../apicalls/shows";
 import { GetAllMovies } from "../../apicalls/movies";
 import { useDispatch } from "react-redux";
+import { DeleteFilled } from "@ant-design/icons"
 
 function Shows({ setOpenShowsModal, theatre }) {
   const dispatch = useDispatch();
@@ -20,17 +21,12 @@ function Shows({ setOpenShowsModal, theatre }) {
       const moviesResponse = await GetAllMovies();
       if (moviesResponse.success) {
         setMovies(moviesResponse.data);
-      } else {
-        message.error(moviesResponse.message);
       }
-
       const showsResponse = await GetAllShowsByTheatre({
         theatreId: theatre._id
       });
       if (showsResponse.success) {
         setShows(showsResponse.data);
-      } else {
-        message.error(showsResponse.message);
       }
       dispatch(HideLoading());
     } catch(err) {
@@ -67,8 +63,6 @@ function Shows({ setOpenShowsModal, theatre }) {
       if (response.success) {
         message.success(response.message);
         getData();
-      } else {
-        message.error(response.message);
       }
       dispatch(HideLoading());
     } catch (error) {
@@ -122,12 +116,9 @@ function Shows({ setOpenShowsModal, theatre }) {
         return (
           <div className="flex gap-1 items-center">
             {rowData.bookedSeats.length === 0 && (
-              <i
-                className="ri-delete-bin-line"
-                onClick={() => {
-                  handleDelete(rowData._id);
-                }}
-              ></i>
+              <DeleteFilled onClick={() => {
+                handleDelete(rowData._id);
+              }} style={{fontSize : "20px"}}/>
             )}
           </div>
         );

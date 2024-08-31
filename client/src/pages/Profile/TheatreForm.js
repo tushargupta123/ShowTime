@@ -31,8 +31,6 @@ function TheatreForm({
         setShowTheatreFormModal(false);
         setSelectedTheatre(null);
         getData();
-      } else {
-        message.error(response.message);
       }
 
       dispatch(HideLoading());
